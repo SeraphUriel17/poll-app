@@ -3,13 +3,13 @@ from django.shortcuts import render
 from .forms import CreatePollForm
 from django.shortcuts import redirect
 from .models import Poll
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 
 @login_required(login_url='/accounts/login')
 def home(request):
     polls = Poll.objects.all()
-
     context = {
         'polls' : polls
     }
@@ -21,7 +21,6 @@ def create(request):
         form = CreatePollForm(request.POST)
         if form.is_valid():
             form.save()
-            
             
             return redirect('home')
     else:
@@ -66,10 +65,9 @@ def vote(request, poll_id):
 
 @login_required(login_url='/accounts/login')
 def profile(request):
-    polls = []
-    for p_id in request.user.profile.poll_number_set.all():
-        polls.append(Poll.objects.filter(id= p_id))
-    context = {
-        'polls' : polls
-    }
-    return render(request, 'poll/profile.html',context)
+    #poll_ids = request.user.profile.poll_number_set.all
+    #polls = Poll.objects.all()
+    #context = {
+    #    'polls' : polls
+    #}
+    return render(request, 'poll/profile.html')#,context)

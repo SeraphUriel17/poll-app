@@ -5,12 +5,12 @@ from flask import request
 from accounts.models import profile
 
 class poll_number(models.Model):
-        profile = models.ForeignKey(profile, on_delete=models.CASCADE)
+        #profile = models.ForeignKey(profile, on_delete=models.CASCADE)
         poll_id = models.IntegerField()
 
         
-        def __init__(self, *args, **kwargs):
-            self.profile = request.user.profile
+        #def __init__(self, *args, **kwargs):
+            #self.profile = request.user.profile
         
         def __str__(self):
             return self.poll_id
@@ -32,8 +32,8 @@ class Poll(models.Model):
         super(Poll, self).__init__(*args, **kwargs)
         self.pub_date = timezone.now()
         #self.user_id = request.user.id
-        poll_num = poll_number.objects.create()
-        poll_num.poll_id = self.id
+        #poll_num = poll_number.objects.create()
+        #poll_num.poll_id = self.id
     
     
     def total(self):

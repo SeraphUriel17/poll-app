@@ -7,7 +7,6 @@ urlpatterns = [
     path('', include('poll.urls')),
     path('accounts/',include ('accounts.urls')),
     path('polls/', include('poll.urls')),
-    #path('polls/', login_required(include('poll.urls'))),
     path("admin/", admin.site.urls),
     
 ]

@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'poll',
     'widget_tweaks',
-    'accounts.apps.AccountsConfig'
+    'accounts.apps.AccountsConfig',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [

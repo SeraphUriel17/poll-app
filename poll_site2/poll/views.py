@@ -17,17 +17,22 @@ def home(request):
 
 @login_required(login_url='/accounts/login')
 def create(request):
-    if request.method == 'POST':
-        form = CreatePollForm(request.POST)
-        if form.is_valid():
-            form.save()
-            
-            return redirect('home')
-    else:
-        form = CreatePollForm()
+    curr_user_id = request.user.id
+    polls = Poll.objects.filter(user_id = curr_user_id)
+    if polls.count()<5:
+        if request.method == 'POST':
+            form = CreatePollForm(request.POST)
+            if form.is_valid():
+                form.save()
+                
+                return redirect('home')
+        else:
+            form = CreatePollForm()
 
-    context = {'form' : form}
-    return render(request, 'poll/create.html', context)
+        context = {'form' : form}
+        return render(request, 'poll/create.html', context)
+    else:
+        return render(request, 'poll/createNP.html')
 
 @login_required(login_url='/accounts/login')
 def results(request, poll_id):
@@ -66,8 +71,9 @@ def vote(request, poll_id):
 @login_required(login_url='/accounts/login')
 def profile(request):
     #poll_ids = request.user.profile.poll_number_set.all
-    #polls = Poll.objects.all()
-    #context = {
-    #    'polls' : polls
-    #}
-    return render(request, 'poll/profile.html')#,context)
+    curr_user_id = request.user.id
+    polls = Poll.objects.filter(user_id = curr_user_id)
+    context = {
+        'polls' : polls
+    }
+    return render(request, 'poll/profile.html',context)

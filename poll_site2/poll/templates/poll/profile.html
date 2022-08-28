@@ -18,12 +18,11 @@
 				  		<p>{{ request.user.profile.phone_number }}</p>
 				  		<p class="text-muted mb-0" style="font-size: 12px">Email:</p>
 				  		<p>{{ user.email }} </p>
-                        <p class="text-muted mb-0" style="font-size: 12px">Email:</p>
+                        <p class="text-muted mb-0" style="font-size: 12px">Polls Created:</p>
 				  		<p>{% for poll in polls %}
                             <li class="list-group-item">
                                 <strong>{{ poll.question }}</strong>
                                 <span class="pull-right">
-                                    <a href="{% url 'vote' poll.id %}" class="btn btn-info btn-xs">Vote</a> &nbsp;
                                     <a href="{% url 'results' poll.id %}" class="btn btn-default btn-xs">View Results</a> &nbsp;
                                 </span>
                             </li>
